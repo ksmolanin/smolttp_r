@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - run: unzip -q muttp-schedule.zip
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -16,7 +17,8 @@ jobs:
         with:
           gradle-version: 8.9
       - run: gradle assembleDebug --no-daemon
+        working-directory: muttp-schedule
       - uses: actions/upload-artifact@v4
         with:
           name: app-debug
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: muttp-schedule/app/build/outputs/apk/debug/app-debug.apk
